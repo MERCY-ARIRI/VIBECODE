@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sui !!</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>Sui !!!</h1>
+    <button id="connectBtn" class="btn ghost">Connect Sui Wallet</button>
+  </header>
+
+  <main class="container">
+    <nav class="tabs" role="tablist">
+      <button class="tab active" id="tab-onramp" role="tab" aria-controls="panel-onramp" aria-selected="true">Onramp (Fiat → Crypto)</button>
+      <button class="tab" id="tab-offramp" role="tab" aria-controls="panel-offramp" aria-selected="false">Offramp (Crypto → Fiat)</button>
+    </nav>
+
+    <section id="panel-onramp" class="panel" role="tabpanel" aria-labelledby="tab-onramp">
+      <form id="onrampForm" class="card">
+        <div class="row">
+          <label>Fiat Amount</label>
+          <input type="number" id="fiatAmount" min="0" step="0.01" placeholder="100.00" required />
+        </div>
+        <div class="row two">
+          <div>
+            <label>Fiat</label>
+            <select id="fiatSelect">
+              <option value="USD">USD</option>
+              <option value="KES">KES</option>
+            </select>
+          </div>
+          <div>
+            <label>Crypto</label>
+            <select id="cryptoSelect">
+              <option value="SUI">SUI</option>
+              <option value="USDC">USDC</option>
+            </select>
+          </div>
+        </div>
+        <div class="actions">
+          <button type="button" id="getOnrampQuote" class="btn primary">Get quote</button>
+          <button type="submit" id="confirmOnramp" class="btn" disabled>Confirm</button>
+        </div>
+      </form>
+
+      <div id="onrampQuote" class="quote card" hidden>
+        <h3>Quote</h3>
+        <div class="grid">
+          <div><span class="label">Rate</span><span id="onrampRate" class="value">–</span></div>
+          <div><span class="label">Network fee</span><span id="onrampNetFee" class="value">–</span></div>
+          <div><span class="label">Platform fee</span><span id="onrampPlatformFee" class="value">–</span></div>
+          <div><span class="label">You receive</span><span id="onrampReceive" class="value">–</span></div>
+        </div>
+        <p class="muted">Mock quotes for demo only.</p>
+      </div>
+    </section>
+
+    <section id="panel-offramp" class="panel hidden" role="tabpanel" aria-labelledby="tab-offramp">
+      <form id="offrampForm" class="card">
+        <div class="row">
+          <label>Crypto Amount</label>
+          <input type="number" id="cryptoAmount" min="0" step="0.0001" placeholder="10.0" required />
+        </div>
+        <div class="row two">
+          <div>
+            <label>Crypto</label>
+            <select id="fromCryptoSelect">
+              <option value="SUI">SUI</option>
+              <option value="USDC">USDC</option>
+            </select>
+          </div>
+          <div>
+            <label>Fiat</label>
+            <select id="toFiatSelect">
+              <option value="USD">USD</option>
+              <option value="KES">KES</option>
+            </select>
+          </div>
+        </div>
+        <div class="actions">
+          <button type="button" id="getOfframpQuote" class="btn primary">Get quote</button>
+          <button type="submit" id="confirmOfframp" class="btn" disabled>Confirm</button>
+        </div>
+      </form>
+
+      <div id="offrampQuote" class="quote card" hidden>
+        <h3>Quote</h3>
+        <div class="grid">
+          <div><span class="label">Rate</span><span id="offrampRate" class="value">–</span></div>
+          <div><span class="label">Network fee</span><span id="offrampNetFee" class="value">–</span></div>
+          <div><span class="label">Platform fee</span><span id="offrampPlatformFee" class="value">–</span></div>
+          <div><span class="label">You receive</span><span id="offrampReceive" class="value">–</span></div>
+        </div>
+        <p class="muted">Mock quotes for demo only.</p>
+      </div>
+    </section>
+
+    <section class="card note">
+      <p><strong>Note:</strong> This is a demo UI with mock quotes. For production, integrate an on/off-ramp provider (Transak, MoonPay, Stripe/Circle) and tie to Sui wallet flows.</p>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sui Marketplace</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>Sui Marketplace</h1>
+    <div class="actions">
+      <button id="connectBtn" class="btn ghost">Connect Sui Wallet</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Onramp/Offramp Hero Section -->
+    <section class="hero card">
+      <div class="hero-head">
+        <h2>Onramp / Offramp</h2>
+        <p class="muted">Convert between Fiat (USD/KES) and Crypto (SUI/USDC). Mock quotes for demo.</p>
+      </div>
+      <nav class="tabs" role="tablist">
+        <button class="tab active" id="tab-onramp" role="tab" aria-controls="panel-onramp" aria-selected="true">Onramp</button>
+        <button class="tab" id="tab-offramp" role="tab" aria-controls="panel-offramp" aria-selected="false">Offramp</button>
+      </nav>
+
+      <section id="panel-onramp" class="panel" role="tabpanel" aria-labelledby="tab-onramp">
+        <form id="onrampForm" class="form">
+          <div class="row">
+            <label>Fiat Amount</label>
+            <input type="number" id="fiatAmount" min="0" step="0.01" placeholder="100.00" required />
+          </div>
+          <div class="row two">
+            <div>
+              <label>Fiat</label>
+              <select id="fiatSelect">
+                <option value="USD">USD</option>
+                <option value="KES">KES</option>
+              </select>
+            </div>
+            <div>
+              <label>Crypto</label>
+              <select id="cryptoSelect">
+                <option value="SUI">SUI</option>
+                <option value="USDC">USDC</option>
+              </select>
+            </div>
+          </div>
+          <div class="row actions-row">
+            <button type="button" id="getOnrampQuote" class="btn primary">Get quote</button>
+            <button type="submit" id="confirmOnramp" class="btn" disabled>Confirm</button>
+          </div>
+        </form>
+
+        <div id="onrampQuote" class="quote card thin" hidden>
+          <div class="grid">
+            <div><span class="label">Rate</span><span id="onrampRate" class="value">–</span></div>
+            <div><span class="label">Network fee</span><span id="onrampNetFee" class="value">–</span></div>
+            <div><span class="label">Platform fee</span><span id="onrampPlatformFee" class="value">–</span></div>
+            <div><span class="label">You receive</span><span id="onrampReceive" class="value">–</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="panel-offramp" class="panel hidden" role="tabpanel" aria-labelledby="tab-offramp">
+        <form id="offrampForm" class="form">
+          <div class="row">
+            <label>Crypto Amount</label>
+            <input type="number" id="cryptoAmount" min="0" step="0.0001" placeholder="10.0" required />
+          </div>
+          <div class="row two">
+            <div>
+              <label>Crypto</label>
+              <select id="fromCryptoSelect">
+                <option value="SUI">SUI</option>
+                <option value="USDC">USDC</option>
+              </select>
+            </div>
+            <div>
+              <label>Fiat</label>
+              <select id="toFiatSelect">
+                <option value="USD">USD</option>
+                <option value="KES">KES</option>
+              </select>
+            </div>
+          </div>
+          <div class="row actions-row">
+            <button type="button" id="getOfframpQuote" class="btn primary">Get quote</button>
+            <button type="submit" id="confirmOfframp" class="btn" disabled>Confirm</button>
+          </div>
+        </form>
+
+        <div id="offrampQuote" class="quote card thin" hidden>
+          <div class="grid">
+            <div><span class="label">Rate</span><span id="offrampRate" class="value">–</span></div>
+            <div><span class="label">Network fee</span><span id="offrampNetFee" class="value">–</span></div>
+            <div><span class="label">Platform fee</span><span id="offrampPlatformFee" class="value">–</span></div>
+            <div><span class="label">You receive</span><span id="offrampReceive" class="value">–</span></div>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <!-- Marketplace Section -->
+    <section class="market">
+      <div class="market-head">
+        <h2>Explore NFTs</h2>
+        <div class="filters card thin">
+          <input id="searchInput" placeholder="Search collections or items" />
+          <select id="chainSelect">
+            <option value="all">All</option>
+            <option value="sui">Sui</option>
+          </select>
+          <select id="sortSelect">
+            <option value="trending">Trending</option>
+            <option value="recent">Recently listed</option>
+            <option value="price_low">Price: Low to High</option>
+            <option value="price_high">Price: High to Low</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="grid" class="grid-cards"></div>
+    </section>
+  </main>
+
+  <!-- Item Modal -->
+  <dialog id="itemModal" class="modal">
+    <div class="modal-card card">
+      <button id="closeModal" class="btn close">✕</button>
+      <div class="modal-body">
+        <img id="modalImage" alt="NFT" />
+        <div class="meta">
+          <h3 id="modalTitle"></h3>
+          <p class="muted" id="modalCollection"></p>
+          <div class="price-row">
+            <span class="label">Price</span>
+            <span class="value" id="modalPrice"></span>
+          </div>
+          <div class="actions">
+            <button id="buyBtn" class="btn primary">Buy (mock)</button>
+            <button id="listBtn" class="btn">List (mock)</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
